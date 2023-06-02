@@ -42,6 +42,7 @@ const tasks = [
   const inputBody = form.elements["body"];
 
   form.addEventListener("submit", onSubmitForm);
+  listContainer.addEventListener("click", onDeleteTask)
 
 
   function renderAllTasks(tasksList) {
@@ -57,7 +58,7 @@ const tasks = [
     listContainer.appendChild(fragment)
   }
 
-  function listItemTemplate({ id, title, body } = {}) {
+  function listItemTemplate({ _id, title, body } = {}) {
     const li = document.createElement("li");
     li.classList.add(
       "list-group-item",
@@ -66,6 +67,7 @@ const tasks = [
       "flex-wrap",
       "mt-2"
     );
+    li.setAttribute("data-task-id", _id);
 
     const span = document.createElement("span");
     span.textContent = title;
@@ -85,7 +87,7 @@ const tasks = [
 
     return li;
   }
-    function onSubmitForm (e) {
+    function onSubmitForm(e) {
       e.preventDefault();
 
       const inputTitleValue = inputTitle.value;
@@ -104,18 +106,51 @@ const tasks = [
 
     };
 
-    function createNewTask (title, body) {
+    function createNewTask(title, body) {
 
       const newTask = {
         title,
         body,
         complited: false,
-        _id: `task ${Math.random()}`
+        _id: `task${Math.random()}`
       };
 
       objOfTasks[newTask._id] = newTask;
-
+      console.log(newTask)
       return {...newTask};
+    
     }
+
+    function deleteTask(id) {
+
+      const {title} = objOfTasks[id];
+      console.log(objOfTasks[id]);
+      const isConfirm = confirm(`Видалити задачу? ${title}`);
+
+      if(!isConfirm) return isConfirm;
+      delete objOfTasks.id;
+      return isConfirm;
+    }
+
+    function deleteTaskFromHtml(confirmed,el) {
+      if(!confirmed) return;
+      el.remove()
+    }
+   
+
+    function onDeleteTask ({target}) {
+      if (target.classList.contains("delete-btn")) {
+        const parent = target.closest("[data-task-id]");
+        console.log(parent);
+        const id = parent.dataset.taskId;
+
+       const confirmed = deleteTask(id);
+
+       deleteTaskFromHtml(confirmed, parent)
+      }
+     
+      
+    }
+
   
 })(tasks);
