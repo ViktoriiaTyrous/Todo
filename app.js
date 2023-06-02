@@ -105,7 +105,7 @@ const tasks = [
   const inputTitle = form.elements["title"];
   const inputBody = form.elements["body"];
   const themeSelect = document.getElementById("themeSelect");
-  themeSelect.value = lastSelectedTheme;
+  // themeSelect.value = lastSelectedTheme;
   
  
 
