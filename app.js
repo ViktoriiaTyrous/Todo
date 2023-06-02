@@ -95,7 +95,7 @@ const tasks = [
     },
   };
 
-  let lastSelectedTheme = localStorage.getItem("app_theme") || "default";
+  let lastSelectedTheme = sessionStorage.getItem("app_theme");
 
   // Elements UI
   const listContainer = document.querySelector(".tasks-list-section .list-group")
@@ -227,7 +227,7 @@ const tasks = [
 
       setTheme(selectedTheme);
       lastSelectedTheme = selectedTheme;
-      localStorage.setItem("app_theme", selectedTheme);
+      sessionStorage.setItem("app_theme", selectedTheme);
       
       
     }
