@@ -95,7 +95,7 @@ const tasks = [
     },
   };
 
-  let lastSelectedTheme = localStorage.getItem("app_theme") || "defauld";
+  let lastSelectedTheme = localStorage.getItem("app_theme") || "default";
 
   // Elements UI
   const listContainer = document.querySelector(".tasks-list-section .list-group")
@@ -105,7 +105,7 @@ const tasks = [
   const inputTitle = form.elements["title"];
   const inputBody = form.elements["body"];
   const themeSelect = document.getElementById("themeSelect");
-  // themeSelect.value = lastSelectedTheme;
+  themeSelect.value = lastSelectedTheme;
   
  
 
